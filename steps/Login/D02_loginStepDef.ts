@@ -10,17 +10,25 @@ Given('user go to login page', async function () {
 });
 
 When('user login with valid {string} and {string}',async function (string, string2) { 
-    // await page.locator("#Email").fill(string2);
-    // await page.locator("#Password").fill(string3);
     await loginPage.enterCredentials(string,string2);
 });
 When('user press on login button',async function () {
-    // await page.locator("button:has-text('Log in')").click();
     await loginPage.clickLoginBtn();
 });
 Then('user login to the system successfully',async function () {
     expect.soft(page.url()).toBe("https://demo.nopcommerce.com/");
-    // await page.waitForSelector("a:has-text('My account'):right-of(a:has-text('Log out'))");
     const myAcc = page.locator("a:has-text('My account'):near(a:has-text('Log out'))");
     await expect.soft(myAcc).toBeVisible();
+});
+
+
+//login with invalid 
+
+When('user login with invalid {string} and {string}',async function (string, string2) { 
+    await loginPage.enterCredentials(string,string2);
+});
+Then('user could not login to the system',async function () {
+    const msg = await loginPage.getErrorLoginMsg();
+    expect.soft(msg).toContain("Login was unsuccessful");
+    await expect.soft(loginPage.errorLoginMsg).toHaveCSS("color","rgb(228, 67, 75)");
 });

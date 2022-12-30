@@ -7,11 +7,14 @@ class Login{
     readonly passwrodInput: Locator;
     readonly loginBtn: Locator;
 
+    readonly errorLoginMsg: Locator;
+
     constructor(page: Page){
         this.page = page;
         this.emailInput = page.locator("#Email");
         this.passwrodInput = page.locator("#Password");
         this.loginBtn = page.locator("button:has-text('Log in')");
+        this.errorLoginMsg = page.locator("div.message-error.validation-summary-errors");
     }
 
     //actions
@@ -22,5 +25,9 @@ class Login{
     async clickLoginBtn(){
         await this.loginBtn.click();
     }
+    async getErrorLoginMsg(){
+        return await this.errorLoginMsg.textContent();
+    }
+    
 }
 export default Login;
