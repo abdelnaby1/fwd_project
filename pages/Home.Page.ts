@@ -20,6 +20,7 @@ class Home {
 
   readonly categories: Locator;
 
+  readonly sliders: Locator
 private category: Locator;
   constructor(page: Page) {
     this.page = page;
@@ -35,6 +36,8 @@ private category: Locator;
 
     this.categories = page.locator("//html/body/div[6]/div[2]/ul[1]/li/a");
     this.category = page.locator("");
+
+    this.sliders = page.locator("div#nivo-slider>a");
   }
   async goToHome() {
     await this.page.goto('https://demo.nopcommerce.com');
@@ -104,7 +107,9 @@ private category: Locator;
         await subcategory.click();        
         return new Category(this.page,subCategoryName);
     }
-
+  }
+  async clickOnSlider(idx:number){
+    await this.sliders.nth(idx).click();
   }
 }
 
