@@ -2,6 +2,7 @@ import { Locator, Page } from "playwright";
 // import { page } from "../steps/hooks";
 import Register from "./Register.Page";
 import Login from "./Login.Page";
+import ProductDetails from "./PoductDetails";
 
 class Home{
     readonly page: Page
@@ -10,7 +11,11 @@ class Home{
     readonly loginLink: Locator;
 
     readonly currencySelect: Locator;
-    readonly prices: Locator
+    readonly prices: Locator;
+
+    readonly searchInput: Locator;
+    // readonly searchBtn: Locator;
+    readonly searchResults: Locator
     constructor(page:Page){
         this.page = page;
         this.registerLink = page.locator("a.ico-register");
@@ -18,6 +23,11 @@ class Home{
 
         this.currencySelect = page.locator("#customerCurrency");
         this.prices = page.locator("span.price");
+        
+        this.searchInput = page.locator("#small-searchterms");
+        // this.searchBtn = page.locator("input:has-text('Search')");
+        this.searchResults = page.locator(".item-box");
+
     }
     async goToHome(){
         await this.page.goto("https://demo.nopcommerce.com");
@@ -46,6 +56,25 @@ class Home{
         }
         return arr;
 
+    }
+
+    async search(productName: string){
+        await this.searchInput.fill(productName);
+        await this.searchInput.press("Enter");
+    }
+    async getResultsTitles(){
+        let arr = new Array<string>()
+        //show all items
+        this.page.selectOption("#products-pagesize",{index:3});
+        let count =  await this.searchResults.count();
+        for (let i = 0; i < count; i++) {
+            arr.push(await this.searchResults.nth(i).innerText());
+        }
+        return arr;
+    }
+    async clickProduct(){
+        await this.searchResults.click();
+        return new ProductDetails(this.page);
     }
 }
 

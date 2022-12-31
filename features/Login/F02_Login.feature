@@ -1,4 +1,4 @@
-@smoke
+# @smoke
 Feature: F02_Login | users could use login functionality to use their accounts
 
     Background:
