@@ -1,4 +1,4 @@
-@smoke
+# @smoke
 Feature: F03_currencies | users could change the currency
 
     Scenario: users could change currency to euro

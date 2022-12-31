@@ -1,4 +1,4 @@
-@smoke
+# @smoke
 Feature: F04_Search | user can search for stores
     Background:
         Given user on home page so he can search
