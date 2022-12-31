@@ -20,7 +20,9 @@ class Home {
 
   readonly categories: Locator;
 
-  readonly sliders: Locator
+  readonly sliders: Locator;
+
+  readonly soicalLinks: Locator;
 private category: Locator;
   constructor(page: Page) {
     this.page = page;
@@ -38,6 +40,8 @@ private category: Locator;
     this.category = page.locator("");
 
     this.sliders = page.locator("div#nivo-slider>a");
+
+    this.soicalLinks = page.locator(".social");
   }
   async goToHome() {
     await this.page.goto('https://demo.nopcommerce.com');
@@ -110,6 +114,12 @@ private category: Locator;
   }
   async clickOnSlider(idx:number){
     await this.sliders.nth(idx).click();
+  }
+
+  async clickOnSoicalLink(linkName:string){
+    linkName = linkName.replace(/^./, linkName[0].toUpperCase());
+
+    await this.soicalLinks.locator(`a:has-text('${linkName}')`).click();
   }
 }
 

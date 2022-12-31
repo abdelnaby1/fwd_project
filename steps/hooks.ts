@@ -1,15 +1,16 @@
 // import { setWorldConstructor } from "@cucumber/cucumber";
 import {After,Before,setDefaultTimeout} from "@cucumber/cucumber"
-import {Browser,chromium,Page} from 'playwright';
+import {Browser,BrowserContext,chromium,Page} from 'playwright';
 import HomePage from "../pages/Home.Page";
 setDefaultTimeout(60000);
 let page: Page;
-let browoser: Browser
+let context: BrowserContext;
+let browoser: Browser;
 let homePage: HomePage;
 Before(async () => {
     try {
         browoser = await chromium.launch({headless: false});
-        const context = await browoser.newContext();
+        context = await browoser.newContext();
         page = await context.newPage();
         homePage = new HomePage(page);
         homePage.goToHome();
@@ -25,4 +26,4 @@ After(async () => {
     await browoser.close();
 })
 // export {page,browoser};
-export {page,homePage};
+export {page,homePage,context};
