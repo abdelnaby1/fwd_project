@@ -7,7 +7,7 @@ class Category{
     returnedText: any;
     constructor(page: Page,categoryName: any){
         this.page = page;
-        this.title = page.locator('div[class="page-title"] h1');
+        this.title = this.page.locator('div[class="page-title"] h1');
         this.returnedText = categoryName;
     }
 

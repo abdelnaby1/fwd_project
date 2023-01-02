@@ -2,7 +2,7 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { homePage, page } from "../hooks";
 import { expect } from "@playwright/test";
 
-Given('user on home page', async function () {
+Given('user on home page to change currency', async function () {
     // i am already on home page
 });
 

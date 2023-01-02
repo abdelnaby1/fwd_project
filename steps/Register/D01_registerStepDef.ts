@@ -1,42 +1,40 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { page,homePage } from "../hooks";
 import { expect } from "@playwright/test";
-import RegisterPage from "../../pages/Register.Page";
 
-let registerPage: RegisterPage;
 
 Given('user go to register page', async function () {
-    registerPage = await homePage.gotoRegisterPage();
+    this.registerPage = await homePage.gotoRegisterPage();
 });
 
 
 When('user select gender type', async function () {
-    await registerPage.chooseGenderMale();
+    await this.registerPage.chooseGenderMale();
 });
 
 When('user enter first name {string} and last name {string}', async function (string, string2) {
-  await registerPage.enterFullName(string,string2);
+  await this.registerPage.enterFullName(string,string2);
 
 });
 
 
 When('user enter date of birth', async function () {
-  await registerPage.chooseDOB();
+  await this.registerPage.chooseDOB();
   
 });
 
 When('user enter email {string} field', async function (string) {
-  await registerPage.enterEmail(string);
+  await this.registerPage.enterEmail(string);
 });
 
 When('user fills Password fields {string} {string}', async function (string, string2) {
-  await registerPage.enterPassword(string,string2);
+  await this.registerPage.enterPassword(string,string2);
 
 });
 
 
 When('user clicks on register button', async function () {
-  await registerPage.clickRegisterBtn();
+  await this.registerPage.clickRegisterBtn();
 });
 
 Then('success message is displayed', async function () {

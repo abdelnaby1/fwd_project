@@ -11,10 +11,10 @@ class Login{
 
     constructor(page: Page){
         this.page = page;
-        this.emailInput = page.locator("#Email");
-        this.passwrodInput = page.locator("#Password");
-        this.loginBtn = page.locator("button:has-text('Log in')");
-        this.errorLoginMsg = page.locator("div.message-error.validation-summary-errors");
+        this.emailInput = this.page.locator("#Email");
+        this.passwrodInput = this.page.locator("#Password");
+        this.loginBtn = this.page.locator("button:has-text('Log in')");
+        this.errorLoginMsg = this.page.locator("div.message-error.validation-summary-errors");
     }
 
     //actions

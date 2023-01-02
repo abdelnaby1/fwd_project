@@ -1,8 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { homePage, page } from "../hooks";
 import { expect } from "@playwright/test";
-import ProductDetails from "../../pages/PoductDetails";
-let prodcutDetailsPage: ProductDetails;
 Given('user on home page so he can search', async function () {
     // i am already on home page
 });
@@ -20,7 +18,7 @@ Then(/user could see the results of that (.*)/,async function(productName) {
 
 
 Then(/user could see the product whose own this (.*)/, async function(sky) {
-    prodcutDetailsPage = await homePage.clickProduct();
-    let productSku = await prodcutDetailsPage.getProudctSku();
+    this.prodcutDetailsPage = await homePage.clickProduct();
+    let productSku = await  this.prodcutDetailsPage.getProudctSku();
     expect(productSku).toContain(sky);
 })

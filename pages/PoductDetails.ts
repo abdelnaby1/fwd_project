@@ -7,7 +7,7 @@ class ProductDetails{
     constructor(page: Page){
         this.page = page;
 
-        this.sku = page.locator("span.value:near(span:has-text('SKU:'))");
+        this.sku = this.page.locator("span.value:near(span:has-text('SKU:'))");
     }
 
     async getProudctSku(){

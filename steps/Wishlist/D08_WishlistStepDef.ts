@@ -1,9 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { homePage, page } from "../hooks";
 import { expect } from "@playwright/test";
-import Wishlist from "../../pages/Wishlist.page";
-
-let wishlistPage: Wishlist;
 
 Given('user on home page to add product to wishlist', async function () {
     // i am already on home page
@@ -26,10 +23,12 @@ When('user waits for a success message to be gone',async function() {
 });
 
 When('user goes to wishlist',async function() {
-   wishlistPage =  await homePage.goToWishlistPage();
+    //share the state with the subsequent blocks
+   this.wishlistPage =  await homePage.goToWishlistPage();
+   
 });
 
 Then('user could see the quantity of that product greater than zero', async function() {
-    let qty = await wishlistPage.getTheQtyOfTheRecentlyAdded();
+    let qty = await this.wishlistPage.getTheQtyOfTheRecentlyAdded();
     expect(+qty).toBeGreaterThan(0);
 });

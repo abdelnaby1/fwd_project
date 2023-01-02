@@ -2,11 +2,8 @@ import { Given, When, Then } from "@cucumber/cucumber";
 import { homePage, page } from "../hooks";
 import { expect } from "@playwright/test";
 
-// Given('user on a home page, async function () {
-//     // i am already on home page
-// });
-
-When('user hover on a category',async function () { 
+Given('user on home page to click on slider',async function () { 
+     // i am already on home page
     
 });
 When('user click on the first slider', async function() {

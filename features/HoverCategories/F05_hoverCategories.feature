@@ -1,4 +1,4 @@
-# @smoke
+@smoke
 Feature: F05_hoverCategories | user could hover a category
     Scenario: user could hover a category and click on one of sub-gategories
         Given user on a home page so he can hover on category
