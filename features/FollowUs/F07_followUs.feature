@@ -1,4 +1,4 @@
-@smoke
+# @smoke
 Feature: F07_followUs | user can follow us on soical websties
     Scenario: user opens facebook link
         Given user on home page

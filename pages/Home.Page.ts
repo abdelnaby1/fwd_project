@@ -4,6 +4,7 @@ import Register from './Register.Page';
 import Login from './Login.Page';
 import ProductDetails from './PoductDetails';
 import Category from './CategoryDetails.Page';
+import Wishlist from './Wishlist.page';
 
 class Home {
   readonly page: Page;
@@ -23,25 +24,37 @@ class Home {
   readonly sliders: Locator;
 
   readonly soicalLinks: Locator;
+
+  readonly notfication: Locator;
+
+  private addToWishlistbtn: Locator;
+
+  readonly wishlist: Locator;
 private category: Locator;
   constructor(page: Page) {
     this.page = page;
-    this.registerLink = page.locator('a.ico-register');
-    this.loginLink = page.locator('a.ico-login');
+    this.registerLink = this.page.locator('a.ico-register');
+    this.loginLink = this.page.locator('a.ico-login');
 
-    this.currencySelect = page.locator('#customerCurrency');
-    this.prices = page.locator('span.price');
+    this.currencySelect = this.page.locator('#customerCurrency');
+    this.prices = this.page.locator('span.price');
 
-    this.searchInput = page.locator('#small-searchterms');
-    // this.searchBtn = page.locator("input:has-text('Search')");
-    this.searchResults = page.locator('.item-box');
+    this.searchInput = this.page.locator('#small-searchterms');
+    // this.searchBtn = this.page.locator("input:has-text('Search')");
+    this.searchResults = this.page.locator('.item-box');
 
-    this.categories = page.locator("//html/body/div[6]/div[2]/ul[1]/li/a");
-    this.category = page.locator("");
+    this.categories = this.page.locator("//html/body/div[6]/div[2]/ul[1]/li/a");
+    this.category = this.page.locator("");
 
-    this.sliders = page.locator("div#nivo-slider>a");
+    this.sliders = this.page.locator("div#nivo-slider>a");
 
-    this.soicalLinks = page.locator(".social");
+    this.soicalLinks = this.page.locator(".social");
+    
+    this.notfication = this.page.locator("#bar-notification .success");
+    this.addToWishlistbtn = this.page.locator("")
+    // this.addToWishlistbtn = this.page.locator("");
+    
+    this.wishlist = this.page.locator("span:has-text('Wishlist')")
   }
   async goToHome() {
     await this.page.goto('https://demo.nopcommerce.com');
@@ -120,6 +133,31 @@ private category: Locator;
     linkName = linkName.replace(/^./, linkName[0].toUpperCase());
 
     await this.soicalLinks.locator(`a:has-text('${linkName}')`).click();
+  }
+
+  async addToWishlist(name: string){
+    // this.addToWishlistbtn = this.page.locator(`button[title="Add to wishlist"]:below(a:has-text('${name}'))`)
+    // let info = this.page.locator(`div.info:near(a:has-text("${name}"))`);
+    let linkSelector = `a:has-text("${name}")`;
+    // let parent = this.page.locator(`${linkSelector} >> xpath=....`)
+    let parent = this.page.locator("div.details",{has: this.page.locator(`text=${name}`)});
+    
+    this.addToWishlistbtn = parent.locator("button:has-text('Add to wishlist')")
+    await this.addToWishlistbtn.click();
+  }
+  async getNotificationText(){
+    return await this.notfication.locator("p.content").textContent();
+  }
+  async getNotificationBackground(){
+    const color = await this.notfication.evaluate((el) => {
+      return window.getComputedStyle(el).getPropertyValue('background-color');
+    });
+    return color;
+  }
+  async goToWishlistPage(){
+    await this.wishlist.click();
+    return new Wishlist(this.page);
+
   }
 }
 

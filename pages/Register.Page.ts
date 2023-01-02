@@ -18,17 +18,17 @@ class Register{
 
     constructor(page: Page){
         this.page = page;
-        this.maleInput = page.locator("#gender-male"); // male
-        this.femaleInput = page.locator("#gender-female"); // fwmale
-        this.firstNameInput = page.locator("#FirstName");
-        this.lastNameInput = page.locator("#LastName");
-        this.dayInput = page.locator("select[name='DateOfBirthDay']");
-        this.monthInput = page.locator("select[name='DateOfBirthMonth']");
-        this.yearInput = page.locator("select[name='DateOfBirthYear']");
-        this.emailInput = page.locator("#Email");
-        this.passwordInput = page.locator("#Password");
-        this.cPasswordInput = page.locator("#ConfirmPassword");
-        this.registerBtn = page.locator("#register-button");
+        this.maleInput = this.page.locator("#gender-male"); // male
+        this.femaleInput = this.page.locator("#gender-female"); // fwmale
+        this.firstNameInput = this.page.locator("#FirstName");
+        this.lastNameInput = this.page.locator("#LastName");
+        this.dayInput = this.page.locator("select[name='DateOfBirthDay']");
+        this.monthInput = this.page.locator("select[name='DateOfBirthMonth']");
+        this.yearInput = this.page.locator("select[name='DateOfBirthYear']");
+        this.emailInput = this.page.locator("#Email");
+        this.passwordInput = this.page.locator("#Password");
+        this.cPasswordInput = this.page.locator("#ConfirmPassword");
+        this.registerBtn = this.page.locator("#register-button");
     }
 
     //actions
